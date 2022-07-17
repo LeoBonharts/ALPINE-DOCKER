@@ -2,7 +2,7 @@
 
 ---
 
-### Operating System `Alpine Linux AMD64 Bit`
+### Operating System `Alpine linux/amd64 & linux/arm64/v8 & linux/arm/v7`
 ### Operating System Version `ALpine Linux EDGE Docker Image`
 
 [![ghcr.io](https://github.com/amirulandalib/mltb-alpine-docker/actions/workflows/github-container-deploy.yml/badge.svg)](https://github.com/amirulandalib/mltb-alpine-docker/actions/workflows/github-container-deploy.yml)

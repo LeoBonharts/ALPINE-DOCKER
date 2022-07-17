@@ -2,7 +2,7 @@ FROM alpine:edge
 
 # LABEL 
 LABEL org.opencontainers.image.source="https://github.com/amirulandalib/mltb-alpine"
-LABEL org.opencontainers.image.description="Docker for MLTB by Anasty based on Alpine v3.16 docker image"
+LABEL org.opencontainers.image.description="Docker for MLTB by Anasty based on Alpine EDGE docker image"
 
 ARG TARGETPLATFORM BUILDPLATFORM
 
