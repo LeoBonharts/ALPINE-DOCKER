@@ -17,30 +17,23 @@ RUN apk update && apk upgrade && \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
     bash alpine-sdk
+
         
 # Installing Mega SDK Python Binding
 ENV PYTHONWARNINGS=ignore
-ENV MEGA_SDK_VERSION="3.12.3"
+ENV MEGA_SDK_VERSION="4.0.2"
 
-RUN wget https://github.com/AmirulAndalib/megaSdkC-Wheel/releases/download/latest/megasdk-4.0.1-py2.py3-none-any.whl \
-    && pip3 install --no-cache-dir megasdk-*.whl 
+RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
+    && cd ~/home/sdk && rm -rf .git \
+    && autoupdate -fIv && ./autogen.sh \
+    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && make -j$(nproc --all) \
+    && cd bindings/python/ && python setup.py bdist_wheel \
+    && cd dist && ls && pip install --no-cache-dir *.whl  
 
 RUN apk update && apk upgrade
 
 
-# Fix locales
-
-ENV MUSL_LOCALE_DEPS cmake make musl-dev gcc gettext-dev libintl
-
-RUN apk add --no-cache \
-    $MUSL_LOCALE_DEPS \
-    && wget https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip \
-    && unzip musl-locales-master.zip \
-      && cd musl-locales-master \
-      && cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install \
-      && cd .. && rm -r musl-locales-master
-
-#
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
