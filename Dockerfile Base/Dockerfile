@@ -21,12 +21,11 @@ RUN apk update && apk upgrade && \
         
 # Installing Mega SDK Python Binding
 ENV PYTHONWARNINGS=ignore
-ENV MEGA_SDK_VERSION="4.0.2"
 
-RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
+RUN git clone https://github.com/AmirulAndalib/MegaNzSdk ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
     && autoupdate -fIv && ./autogen.sh \
-    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples --with-python3 -fpermissive \
+    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples --with-python3 \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python setup.py bdist_wheel \
     && cd dist && ls && pip install --no-cache-dir *.whl  
