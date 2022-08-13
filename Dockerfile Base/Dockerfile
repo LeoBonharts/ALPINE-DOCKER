@@ -8,7 +8,7 @@ ARG TARGETPLATFORM BUILDPLATFORM
 
 # install packages via APK
 RUN apk update && apk upgrade && \
-    apk add crypto++-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
+    apk add --upgrade --no-cache crypto++-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
     apk add --upgrade --no-cache \
     musl-dev qbittorrent python3-dev busybox \
     qbittorrent-nox py3-pip py3-lxml aria2 p7zip xz curl pv jq ffmpeg \
