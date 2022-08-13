@@ -10,14 +10,37 @@ ARG TARGETPLATFORM BUILDPLATFORM
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add --upgrade --no-cache crypto++-dev \
-    musl-dev qbittorrent python3-dev busybox \
+    apk add --upgrade --no-cache \
+    musl-dev qbittorrent python3-dev busybox crypto++ \
     qbittorrent-nox py3-pip py3-lxml aria2 p7zip xz curl pv jq ffmpeg \
     musl-locales neofetch git make g++ gcc automake zip unzip autoconf \
     libtool curl-dev libsodium-dev libressl-dev openssl-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk
+    bash alpine-sdk crypto++-dev
+
+RUN apk update \
+  && apk upgrade \
+  && apk add --no-cache \
+    clang \
+    clang-dev \
+    alpine-sdk \
+    dpkg \
+    cmake \
+    ccache \
+    python3
+
+RUN ln -sf /usr/bin/clang /usr/bin/cc \
+  && ln -sf /usr/bin/clang++ /usr/bin/c++ \
+  && update-alternatives --install /usr/bin/cc cc /usr/bin/clang 10\
+  && update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 10\
+  && update-alternatives --auto cc \
+  && update-alternatives --auto c++ \
+  && update-alternatives --display cc \
+  && update-alternatives --display c++ \
+  && ls -l /usr/bin/cc /usr/bin/c++ \
+  && cc --version \
+  && c++ --version
 
         
 # Installing Mega SDK Python Binding
