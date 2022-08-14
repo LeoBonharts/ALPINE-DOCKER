@@ -9,26 +9,14 @@ ARG TARGETPLATFORM BUILDPLATFORM
 # install packages via APK
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk update && apk upgrade && \
     apk add --no-cache \
     musl-dev qbittorrent python3-dev busybox \
     qbittorrent-nox py3-pip py3-lxml aria2 p7zip xz curl pv jq ffmpeg \
     musl-locales neofetch git make g++ gcc automake zip unzip autoconf \
-    libtool curl-dev libsodium-dev libressl-dev \
+    libtool curl-dev libsodium-dev libressl-dev libressl \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk
-
-RUN apk update \
-  && apk upgrade \
-  && apk add --no-cache \
-    clang \
-    clang-dev \
-    alpine-sdk \
-    dpkg \
-    cmake \
-    ccache \
-    python3
+    bash alpine-sdk clang clang-dev dpkg cmake ccache
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
