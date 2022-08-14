@@ -17,8 +17,7 @@ RUN apk update && apk upgrade && \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
     bash alpine-sdk clang clang-dev dpkg cmake ccache \
-    && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    && apk add --upgrade --no-cache libressl libressl-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+    && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
