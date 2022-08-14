@@ -10,13 +10,14 @@ ARG TARGETPLATFORM BUILDPLATFORM
 
 RUN apk update && apk upgrade && \
     apk add --upgrade --fix --no-cache \
-    musl-dev qbittorrent python3-dev busybox \
+    musl-dev qbittorrent python3 python3-dev busybox \
     qbittorrent-nox py3-pip py3-lxml aria2 p7zip xz curl pv jq ffmpeg \
     musl-locales neofetch git make g++ gcc automake zip unzip autoconf \
     libtool curl-dev libsodium-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk clang clang-dev dpkg cmake ccache
+    bash alpine-sdk clang clang-dev dpkg cmake ccache \
+    && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
