@@ -17,7 +17,8 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     libtool curl-dev libsodium-dev crypto++ crypto++-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk clang clang-dev dpkg cmake ccache
+    bash alpine-sdk clang clang-dev dpkg cmake ccache \
+    openssl openssl-dev libressl libressl-dev
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
