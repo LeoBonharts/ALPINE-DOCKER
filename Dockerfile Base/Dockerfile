@@ -16,8 +16,7 @@ RUN apk update && apk upgrade && \
     libtool curl-dev libsodium-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk clang clang-dev dpkg cmake ccache \
-    openssl openssl-dev libressl libressl-dev
+    bash alpine-sdk clang clang-dev dpkg cmake ccache
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
