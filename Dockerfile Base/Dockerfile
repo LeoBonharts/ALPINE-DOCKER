@@ -7,13 +7,13 @@ LABEL org.opencontainers.image.description="Docker for MLTB by Anasty based on A
 ARG TARGETPLATFORM BUILDPLATFORM
 
 # install packages via APK
-RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk update && apk upgrade && \
+
+RUN apk update && apk upgrade && \
     apk add --upgrade --fix --no-cache \
     musl-dev qbittorrent python3-dev busybox \
     qbittorrent-nox py3-pip py3-lxml aria2 p7zip xz curl pv jq ffmpeg \
     musl-locales neofetch git make g++ gcc automake zip unzip autoconf \
-    libtool curl-dev libsodium-dev crypto++@testing crypto++-dev@testing \
+    libtool curl-dev libsodium-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
     bash alpine-sdk clang clang-dev dpkg cmake ccache \
