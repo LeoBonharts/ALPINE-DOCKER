@@ -16,8 +16,9 @@ RUN apk update && apk upgrade && \
     libtool curl-dev libsodium-dev \
     c-ares-dev sqlite-dev freeimage-dev swig boost-dev \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
-    bash alpine-sdk clang clang-dev dpkg cmake ccache icu-data-full \
-    && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+    bash alpine-sdk clang clang-dev dpkg cmake ccache icu-data-full gettext gettext-dev gawk \
+    && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
+    pip3 install wheel
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
@@ -38,10 +39,10 @@ ENV PYTHONWARNINGS=ignore
 RUN git clone https://github.com/AmirulAndalib/MegaNzSdk ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
     && autoupdate -fIv && ./autogen.sh \
-    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples --with-python3 \
+    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
     && make -j$(nproc --all) \
-    && cd bindings/python/ && python setup.py bdist_wheel \
-    && cd dist && ls && pip install --no-cache-dir *.whl  
+    && cd bindings/python/ && python3 setup.py bdist_wheel \
+    && cd dist && ls && pip3 install --no-cache-dir *.whl  
 
 RUN apk update && apk upgrade
 
