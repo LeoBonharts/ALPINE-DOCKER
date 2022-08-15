@@ -20,7 +20,7 @@ RUN apk update && apk upgrade && \
     && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
     pip3 install wheel \
     && apk del openssl openssl-dev libressl libressl-dev \
-    && apk add --no-cache openssl openssl-dev libressl libressl-dev
+    && apk add --no-cache libressl libressl-dev
 
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
