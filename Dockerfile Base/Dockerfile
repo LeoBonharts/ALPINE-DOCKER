@@ -18,9 +18,7 @@ RUN apk update && apk upgrade && \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
     bash alpine-sdk clang clang-dev dpkg cmake ccache icu-data-full gettext gettext-dev gawk \
     && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
-    pip3 install wheel \
-    && apk del openssl openssl-dev libressl libressl-dev \
-    && apk add --no-cache libressl libressl-dev
+    pip3 install wheel
 
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
