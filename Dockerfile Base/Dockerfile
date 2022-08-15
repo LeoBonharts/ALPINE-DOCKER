@@ -18,7 +18,10 @@ RUN apk update && apk upgrade && \
     libpthread-stubs zlib-dev libpq-dev libffi-dev py3-virtualenv libffi \
     bash alpine-sdk clang clang-dev dpkg cmake ccache icu-data-full gettext gettext-dev gawk \
     && apk add --upgrade --no-cache crypto++-dev crypto++ --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
-    pip3 install wheel
+    pip3 install wheel \
+    && apk del openssl openssl-dev libressl libressl-dev \
+    && apk add --no-cache openssl openssl-dev libressl libressl-dev
+
 
 RUN ln -sf /usr/bin/clang /usr/bin/cc \
   && ln -sf /usr/bin/clang++ /usr/bin/c++ \
@@ -36,10 +39,11 @@ RUN ln -sf /usr/bin/clang /usr/bin/cc \
 # Installing Mega SDK Python Binding
 ENV PYTHONWARNINGS=ignore
 
-RUN git clone https://github.com/AmirulAndalib/MegaNzSdk ~/home/sdk \
+RUN git clone https://github.com/meganz/sdk.git ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
     && autoupdate -fIv && ./autogen.sh \
-    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && ./configure CFLAGS='-fpermissive' CXXFLAGS='-fpermissive' CPPFLAGS='-fpermissive' CCFLAGS='-fpermissive' \
+    --disable-silent-rules --enable-python --with-sodium --disable-examples --with-python3 \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist && ls && pip3 install --no-cache-dir *.whl  
